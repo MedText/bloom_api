@@ -3,10 +3,8 @@ require 'JSON'
 
 describe BloomApi do
 
-	describe '#find_by_npi' do
-
+  describe '#find_by_npi' do
 		subject { BloomApi.find_by_npi(npi) }
-
 
 		context 'when given a valid npi' do
 			context 'for an individual' do
@@ -45,11 +43,9 @@ describe BloomApi do
 				expect(subject).to be_nil
 			end
 		end
+  end
 
-	end
-
-	describe '#find_by' do
-
+  describe '#find_by' do
 		subject { BloomApi.find_by(criteria) }
 
 		context 'when given valid criteria' do
@@ -111,6 +107,30 @@ describe BloomApi do
 				expect(subject.first.npi).to eq '1003002809'
 			end
 		end
+  end
 
-	end
+  describe '#find_by_specialty_code' do
+		subject { BloomApi.find_by_specialty_code(code) }
+
+		context 'when given a valid code' do
+			let(:code) { '2086X0206X' }
+
+			it { expect(subject).to be_a Array }
+			it { expect(subject.size).to eq 2 }
+			it { expect(subject.first).to be_a BloomApi::MedicareSpecialty }
+
+			it 'returns the right medicare specialty' do
+				expect(subject.first.code).to eq '91'
+			end
+		end
+
+		context 'when given an invalid code' do
+			let(:code) { 'bogus_code' }
+
+			it 'returns nil' do
+				expect(subject).to be_empty
+			end
+		end
+  end
+
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bloom_api (0.0.3)
+    bloom_api (0.0.5.beta)
 
 GEM
   remote: https://rubygems.org/
@@ -29,3 +29,6 @@ DEPENDENCIES
   bundler (~> 1.7)
   rake (~> 10.0)
   rspec
+
+BUNDLED WITH
+   1.10.6
